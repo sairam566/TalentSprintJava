@@ -1,0 +1,15 @@
+package assignment2;
+
+public class BMICalculator
+{
+	public static void main(String[] args)
+	{
+		float weight=75.0f;
+		float height=169.0f;
+		
+		float bmi=weight/height;
+		
+		System.out.println(bmi);
+	}
+
+}

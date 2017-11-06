@@ -1,0 +1,17 @@
+package assignment2;
+
+public class BMICalculator
+{
+	public static void main(String[] args)
+	{
+		float weight=75.0f;
+		float heightincm=169.0f;
+		
+		float meters=heightincm/100;
+		
+		float bmi=weight/heightincm*(meters*meters);
+		
+		System.out.println(bmi);
+	}
+
+}

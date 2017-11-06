@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;basicprograms&apos; to &apos;basicprogramsdayone&apos;&#x0A;- Original project: &apos;ECC_Project&apos;&#x0A;- Original element: &apos;ECC_Project/src/basicprograms&apos;&#x0A;- Renamed element: &apos;ECC_Project/src/basicprogramsdayone&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;basicprograms&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src&lt;basicprograms" name="basicprogramsdayone" qualified="false" references="true" stamp="1509613875495" textual="false" version="1.0"/>
+</session>

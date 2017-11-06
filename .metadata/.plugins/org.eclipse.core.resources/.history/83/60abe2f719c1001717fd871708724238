@@ -1,0 +1,16 @@
+package assignment2;
+
+public class ConvertMinToDayAndYear
+{
+	public static void main(String[] args)
+	{
+		int minutes=60;
+		
+		int days;
+		
+		days = minutes / 1440;
+		
+		System.out.println(minutes+" Minutes is EqualTo"+days);
+	}
+
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/ECC_Project/src/assignment2/ConvertMinToDayAndYear.java"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="1"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="assignment2.ConvertMinToDayAndYear"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="ECC_Project"/>
+</launchConfiguration>
