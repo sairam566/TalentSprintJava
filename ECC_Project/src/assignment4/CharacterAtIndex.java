@@ -6,7 +6,6 @@ public class CharacterAtIndex {
 		String name="sairam";
 		int index=0;
 		System.out.println("the character at position "+index+" is "+name.charAt(index-1));
-		
 	}
 
 }
