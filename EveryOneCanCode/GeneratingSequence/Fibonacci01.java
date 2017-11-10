@@ -22,6 +22,7 @@ public class Fibonacci01 {
 				n1=n2;
 				n2=temp;
 			}
+			result=result.substring(0,result.length()-1);
 			return result;
 		}
 		return "-1";
