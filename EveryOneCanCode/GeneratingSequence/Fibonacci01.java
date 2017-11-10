@@ -11,7 +11,7 @@ public class Fibonacci01 {
 			}
 			if(num==2)
 			{
-				return "1";
+				return "0,1";
 			}
 			int n1=0,n2=1,temp;
 			String result="0,1,";
