@@ -12,13 +12,6 @@ public class Armstrong01 {
 		if (start >= limit) {
 			return "-2";
 		}
-		
-		
-		
-		
-		
-		
-		
 		String result = "";
 		for (int i = start; i <= limit; i++) {
 			if (isArmstrong(i)) {
