@@ -1,0 +1,15 @@
+public class FindAreaOfRectangle {
+
+	public static void main(String[] args) {
+		
+		int length=10;
+		int width=20;
+		
+		System.out.println("The Area Of Rectangle with length= "+length+" and Width= "+width+" is ="+ areaOfRectangle(length, width));
+	}
+
+	public static int areaOfRectangle(int lenght, int width) {
+		return lenght * width;
+	}
+
+}
