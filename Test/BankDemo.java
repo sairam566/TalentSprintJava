@@ -11,7 +11,6 @@ public class BankDemo
 		ArrayList <Customer> arrayList = new ArrayList<Customer>();
 		String name;
 		int id,choice;
-
 		double amount;
 		do
 		{
@@ -41,9 +40,15 @@ public class BankDemo
 				{
 					if(cust.getId() == id)
 					{
+						System.out.println("---------------------------------------------");
+						System.out.println();
 						System.out.println("Id :" + cust.getId());
 						System.out.println("Name : " + cust.getName());
 						System.out.println("Balance :"+ cust.getBalance());
+						System.out.println();
+						System.out.println("---------------------------------------------");
+						System.out.flush(); // it is not clearing the above statements
+
 						flag = true;					
 					}
 				}
@@ -59,12 +64,16 @@ public class BankDemo
 				{
 					if(cust.getId() == id)
 					{
+						System.out.println();
 						System.out.println("Welcome Mr/Miss: " + cust.getName());
+						System.out.println();
 						System.out.print("How much Money do you want to Deposit :");
 						double addbalance=sc.nextInt();
 						addbalance=addbalance+cust.getBalance();
 						cust.setBalance(addbalance);
+						System.out.println();
 						System.out.println("Balance Added successfully");
+						System.out.println();
 						System.out.println("your TotalBalance is :"+cust.getBalance());
 						flag = true;
 					}
@@ -86,14 +95,15 @@ public class BankDemo
 						System.out.println("Welcome Mr/Miss: " + cust.getName());
 						System.out.println("How much Money do you want to WithDraw :");
 						double deductbalance=sc.nextInt();
-						double money=deductbalance-cust.getBalance();
-						if(cust.getBalance()<1000)
+						double money=(cust.getBalance()- deductbalance);
+					
+						if(money<1000.0)
 						{
 							System.out.println("Sorry your should have atleast "+1000+" in your account");
 						}
 						else
 						{
-							money=money-cust.getBalance();
+							money=cust.getBalance()-deductbalance;
 							cust.setBalance(money);
 							System.out.println("your TotalBalance is :"+cust.getBalance());
 						}
@@ -102,30 +112,13 @@ public class BankDemo
 				break;
 				
 //----------------------------------------------------------------------------------------------------
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
+				default:
 				
 				
 			}	
 				} while(choice < 5);
+		
+		System.out.println("Thanks For using TalentSprint Bank");
 
 			}
 	}
