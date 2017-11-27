@@ -10,10 +10,15 @@ public class BankDemo
 		Scanner sc = new Scanner(System.in);
 		ArrayList <Customer> arrayList = new ArrayList<Customer>();
 		String name;
-		int id,choice;
+		int id,choice=0;
 		double amount;
+			
 		do
 		{
+			if (choice>5)
+			{
+				System.out.println("Wrong Choise");
+			}
 			boolean flag = false;
 			System.out.println("1. ADD CUSTOMER");
 			System.out.println("2. DISPLAY CUSTOMER");
@@ -68,7 +73,7 @@ public class BankDemo
 						System.out.println("Welcome Mr/Miss: " + cust.getName());
 						System.out.println();
 						System.out.print("How much Money do you want to Deposit :");
-						double addbalance=sc.nextInt();
+						double addbalance=sc.nextDouble();
 						addbalance=addbalance+cust.getBalance();
 						cust.setBalance(addbalance);
 						System.out.println();
@@ -105,7 +110,12 @@ public class BankDemo
 						{
 							money=cust.getBalance()-deductbalance;
 							cust.setBalance(money);
-							System.out.println("your TotalBalance is :"+cust.getBalance());
+
+							System.out.println(" ---------------------------------------");
+							System.out.println("| Customer id is: "+cust.getId()+"                  |");
+							System.out.println("| Customer Name is"+cust.getName()+"                  |");
+							System.out.println("| your Avilable Balance is :"+cust.getBalance()+"     |");
+							System.out.println(" ---------------------------------------");
 						}
 					}
 				}
@@ -113,21 +123,13 @@ public class BankDemo
 				
 //----------------------------------------------------------------------------------------------------
 				default:
+			}
 				
 				
-			}	
-				} while(choice < 5);
+				} while(choice!=5);
 		
+
 		System.out.println("Thanks For using TalentSprint Bank");
 
-			}
-	}
-
-
-
-
-
-
-
-
-
+			}//main
+	}//class
