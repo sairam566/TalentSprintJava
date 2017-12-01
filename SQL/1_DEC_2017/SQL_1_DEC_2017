@@ -1,0 +1,608 @@
+tsuser@imperial:~$ mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 4
+Server version: 5.7.20-0ubuntu0.16.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2017, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use c03
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> select * from sutdent
+    -> ;
+ERROR 1146 (42S02): Table 'c03.sutdent' doesn't exist
+mysql> show tables;
++---------------+
+| Tables_in_c03 |
++---------------+
+| student       |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select * from student;
++------+-----------+--------+------------+----------+
+| sno  | sname     | course | doj        | fee      |
++------+-----------+--------+------------+----------+
+|  100 | sairam    | Java   | 1995-04-25 | 45000.00 |
+|  101 | Karimulla | M.Tech | 1994-08-27 |     0.00 |
+|  103 | Bhargav   | NULL   | NULL       | 56000.00 |
++------+-----------+--------+------------+----------+
+3 rows in set (0.00 sec)
+
+mysql> update student set course='Oracle',doj='2017-12-24' where sno=103;
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from student;
++------+-----------+--------+------------+----------+
+| sno  | sname     | course | doj        | fee      |
++------+-----------+--------+------------+----------+
+|  100 | sairam    | Java   | 1995-04-25 | 45000.00 |
+|  101 | Karimulla | M.Tech | 1994-08-27 |     0.00 |
+|  103 | Bhargav   | Oracle | 2017-12-24 | 56000.00 |
++------+-----------+--------+------------+----------+
+3 rows in set (0.00 sec)
+
+mysql> update student set fee=fee-100;
+Query OK, 3 rows affected (0.06 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select * from student;
++------+-----------+--------+------------+----------+
+| sno  | sname     | course | doj        | fee      |
++------+-----------+--------+------------+----------+
+|  100 | sairam    | Java   | 1995-04-25 | 44900.00 |
+|  101 | Karimulla | M.Tech | 1994-08-27 |  -100.00 |
+|  103 | Bhargav   | Oracle | 2017-12-24 | 55900.00 |
++------+-----------+--------+------------+----------+
+3 rows in set (0.00 sec)
+
+mysql> update student set fee=fee+100
+    -> ;
+Query OK, 3 rows affected (0.04 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select * from student;
++------+-----------+--------+------------+----------+
+| sno  | sname     | course | doj        | fee      |
++------+-----------+--------+------------+----------+
+|  100 | sairam    | Java   | 1995-04-25 | 45000.00 |
+|  101 | Karimulla | M.Tech | 1994-08-27 |     0.00 |
+|  103 | Bhargav   | Oracle | 2017-12-24 | 56000.00 |
++------+-----------+--------+------------+----------+
+3 rows in set (0.00 sec)
+
+mysql> update student set fee=35000 where sno=101;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from student;
++------+-----------+--------+------------+----------+
+| sno  | sname     | course | doj        | fee      |
++------+-----------+--------+------------+----------+
+|  100 | sairam    | Java   | 1995-04-25 | 45000.00 |
+|  101 | Karimulla | M.Tech | 1994-08-27 | 35000.00 |
+|  103 | Bhargav   | Oracle | 2017-12-24 | 56000.00 |
++------+-----------+--------+------------+----------+
+3 rows in set (0.00 sec)
+
+mysql> create table Test(sid int(2) unique,name varchar(2));
+Query OK, 0 rows affected (0.35 sec)
+
+mysql> desc Test;
++-------+------------+------+-----+---------+-------+
+| Field | Type       | Null | Key | Default | Extra |
++-------+------------+------+-----+---------+-------+
+| sid   | int(2)     | YES  | UNI | NULL    |       |
+| name  | varchar(2) | YES  |     | NULL    |       |
++-------+------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> create table Parent(P_ID INT(3) PRIMARY KEY,P_NAME VARCHAR(20));
+Query OK, 0 rows affected (0.28 sec)
+
+mysql> DESC PARENT
+    -> ;
+ERROR 1146 (42S02): Table 'c03.PARENT' doesn't exist
+mysql> DESC Parent;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| P_ID   | int(3)      | NO   | PRI | NULL    |       |
+| P_NAME | varchar(20) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> create table Child(C_ID INT(3),C_NAME VARCHAR(20),P_ID INT(3),FOREIGN KEY(P_ID) REFERENCES PARENT(P_ID));
+ERROR 1215 (HY000): Cannot add foreign key constraint
+mysql> create table Child(C_ID INT(3),C_NAME VARCHAR(20),P_ID INT(3),FOREIGN KEY(P_ID) REFERENCES Parent(P_ID));
+Query OK, 0 rows affected (0.62 sec)
+
+mysql> desc Child;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| C_ID   | int(3)      | YES  |     | NULL    |       |
+| C_NAME | varchar(20) | YES  |     | NULL    |       |
+| P_ID   | int(3)      | YES  | MUL | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into Parent value(100,'dhoni');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into Parent value(100,'dhoni');
+ERROR 1062 (23000): Duplicate entry '100' for key 'PRIMARY'
+mysql> insert into Parent value(101,'kohli');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into Parent value(101,'sachin');
+ERROR 1062 (23000): Duplicate entry '101' for key 'PRIMARY'
+mysql> insert into Parent value(102,'sachin');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from Parent;
++------+--------+
+| P_ID | P_NAME |
++------+--------+
+|  100 | dhoni  |
+|  101 | kohli  |
+|  102 | sachin |
++------+--------+
+3 rows in set (0.00 sec)
+
+mysql> desc Child;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| C_ID   | int(3)      | YES  |     | NULL    |       |
+| C_NAME | varchar(20) | YES  |     | NULL    |       |
+| P_ID   | int(3)      | YES  | MUL | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table Child modify C_ID int(3) primary key;
+Query OK, 0 rows affected (0.62 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc Child;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| C_ID   | int(3)      | NO   | PRI | NULL    |       |
+| C_NAME | varchar(20) | YES  |     | NULL    |       |
+| P_ID   | int(3)      | YES  | MUL | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into Child values(1,'sai',100);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into Child values(2,'ram',100);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into Child values(3,'thadi',101);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from Child;
++------+--------+------+
+| C_ID | C_NAME | P_ID |
++------+--------+------+
+|    1 | sai    |  100 |
+|    2 | ram    |  100 |
+|    3 | thadi  |  101 |
++------+--------+------+
+3 rows in set (0.00 sec)
+
+mysql> create table Student(sid int(3) primary key auto_increment,sname varchar(20),fee float(8,2));
+Query OK, 0 rows affected (0.28 sec)
+
+mysql> desc Student;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| sid   | int(3)      | NO   | PRI | NULL    | auto_increment |
+| sname | varchar(20) | YES  |     | NULL    |                |
+| fee   | float(8,2)  | YES  |     | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> insert into Student(sname) values('sairam');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into Student(sname) values('karimulla');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select * fromStudent;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'fromStudent' at line 1
+mysql> select * from Student;
++-----+-----------+------+
+| sid | sname     | fee  |
++-----+-----------+------+
+|   1 | sairam    | NULL |
+|   2 | karimulla | NULL |
++-----+-----------+------+
+2 rows in set (0.00 sec)
+
+mysql> deleat Student;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'deleat Student' at line 1
+mysql> delete Student;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> drop Student;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Student' at line 1
+mysql> mysql -help
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mysql -help' at line 1
+mysql> delete from Student;
+Query OK, 2 rows affected (0.06 sec)
+
+mysql> select * from Student;
+Empty set (0.00 sec)
+
+mysql> alter table Student modify fee float(8,2) default 50000;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc Student;
++-------+-------------+------+-----+----------+----------------+
+| Field | Type        | Null | Key | Default  | Extra          |
++-------+-------------+------+-----+----------+----------------+
+| sid   | int(3)      | NO   | PRI | NULL     | auto_increment |
+| sname | varchar(20) | YES  |     | NULL     |                |
+| fee   | float(8,2)  | YES  |     | 50000.00 |                |
++-------+-------------+------+-----+----------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> create table Department(dno int(3) primary key auto_increment,dname varchar(20),location varchar(20));
+Query OK, 0 rows affected (0.43 sec)
+
+mysql> desc Department;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| dno      | int(3)      | NO   | PRI | NULL    | auto_increment |
+| dname    | varchar(20) | YES  |     | NULL    |                |
+| location | varchar(20) | YES  |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> alter table Department modify dno int(3) primary key auto_increment=10;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=10' at line 1
+mysql> alter table Department modify dno int(3) primary key auto_increment=10;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=10' at line 1
+mysql> alter table Department auto_increment=10;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc Department;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| dno      | int(3)      | NO   | PRI | NULL    | auto_increment |
+| dname    | varchar(20) | YES  |     | NULL    |                |
+| location | varchar(20) | YES  |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> create table Employee(eno int(3) primary key auto_increment,ename varchar(20),salary float(8,2),dno int(3),FOREIGN KEY(dno) REFERENCES PARENT(dno));
+ERROR 1215 (HY000): Cannot add foreign key constraint
+mysql> desc Department;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| dno      | int(3)      | NO   | PRI | NULL    | auto_increment |
+| dname    | varchar(20) | YES  |     | NULL    |                |
+| location | varchar(20) | YES  |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> insert into Department(dname,location) values('sai','hyd');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into Department(dname,location) values('ram','Bang');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from Department;
++-----+-------+----------+
+| dno | dname | location |
++-----+-------+----------+
+|  10 | sai   | hyd      |
+|  11 | ram   | Bang     |
++-----+-------+----------+
+2 rows in set (0.00 sec)
+
+mysql> DROP TABLE EMP;
+ERROR 1051 (42S02): Unknown table 'c03.EMP'
+mysql> DROP TABLE DEPT;
+ERROR 1051 (42S02): Unknown table 'c03.DEPT'
+mysql> DROP TABLE BONUS;
+ERROR 1051 (42S02): Unknown table 'c03.BONUS'
+mysql> DROP TABLE SALGRADE;
+ERROR 1051 (42S02): Unknown table 'c03.SALGRADE'
+mysql> DROP TABLE DUMMY;
+ERROR 1051 (42S02): Unknown table 'c03.DUMMY'
+mysql> 
+mysql> CREATE TABLE EMP
+    ->        (EMPNO DECIMAL(4) NOT NULL,
+    ->         ENAME VARCHAR(10),
+    ->         JOB VARCHAR(9),
+    ->         MGR DECIMAL(4),
+    ->         HIREDATE DATE,
+    ->         SAL DECIMAL(7,2),
+    ->         COMM DECIMAL(7,2),
+    ->         DEPTNO DECIMAL(2));
+Query OK, 0 rows affected (0.28 sec)
+
+mysql> 
+mysql> INSERT INTO EMP VALUES
+    ->         (7369,'SMITH','CLERK',7902,'17-12-80',800,NULL,20);
+ERROR 1292 (22007): Incorrect date value: '17-12-80' for column 'HIREDATE' at row 1
+mysql> INSERT INTO EMP VALUES
+    ->         (7499,'ALLEN','SALESMAN',7698,'81-02-20',1600,300,30);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO EMP VALUES
+    ->         (7521,'WARD','SALESMAN',7698,'81-02-22',1250,500,30);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO EMP VALUES
+    ->         (7566,'JONES','MANAGER',7839,'81-04-22',2975,NULL,20);
+Query OK, 1 row affected (0.13 sec)
+
+mysql> INSERT INTO EMP VALUES
+    ->         (7654,'MARTIN','SALESMAN',7698,'81-09-28',1250,1400,30);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO EMP VALUES
+    ->         (7698,'BLAKE','MANAGER',7839,'81-05-01',2850,NULL,30);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO EMP VALUES
+    ->         (7782,'CLARK','MANAGER',7839,'81-06-09',2450,NULL,10);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO EMP VALUES
+    ->         (7788,'SCOTT','ANALYST',7566,'82-12-09',3000,NULL,20);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO EMP VALUES
+    ->         (7839,'KING','PRESIDENT',NULL,'81-11-17',5000,NULL,10);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO EMP VALUES
+    ->         (7844,'TURNER','SALESMAN',7698,'81-11-8',1500,0,30);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO EMP VALUES
+    ->         (7876,'ADAMS','CLERK',7788,'83-01-12',1100,NULL,20);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO EMP VALUES
+    ->         (7900,'JAMES','CLERK',7698,'81-10-3',950,NULL,30);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO EMP VALUES
+    ->         (7902,'FORD','ANALYST',7566,'82-10-03',3000,NULL,20);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO EMP VALUES
+    ->         (7934,'MILLER','CLERK',7782,'82-01-23',1300,NULL,10);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> 
+mysql> CREATE TABLE DEPT
+    ->        (DEPTNO DECIMAL(2),
+    ->         DNAME VARCHAR(14),
+    ->         LOC VARCHAR(13) );
+Query OK, 0 rows affected (0.27 sec)
+
+mysql> 
+mysql> INSERT INTO DEPT VALUES
+    ->         (10,'ACCOUNTING','NEW YORK');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO DEPT VALUES (20,'RESEARCH','DALLAS');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO DEPT VALUES
+    ->         (30,'SALES','CHICAGO');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO DEPT VALUES
+    ->         (40,'OPERATIONS','BOSTON');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> 
+mysql> CREATE TABLE BONUS
+    ->         (
+    ->         ENAME VARCHAR(10),
+    ->         JOB VARCHAR(9),
+    ->         SAL DECIMAL,
+    ->         COMM DECIMAL
+    ->         );
+Query OK, 0 rows affected (0.33 sec)
+
+mysql> 
+mysql> CREATE TABLE SALGRADE
+    ->       ( GRADE DECIMAL,
+    ->         LOSAL DECIMAL,
+    ->         HISAL DECIMAL );
+Query OK, 0 rows affected (0.30 sec)
+
+mysql> 
+mysql> INSERT INTO SALGRADE VALUES (1,700,1200);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO SALGRADE VALUES (2,1201,1400);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO SALGRADE VALUES (3,1401,2000);
+Query OK, 1 row affected (0.15 sec)
+
+mysql> INSERT INTO SALGRADE VALUES (4,2001,3000);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO SALGRADE VALUES (5,3001,9999);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> 
+mysql> CREATE TABLE DUMMY
+    ->       ( DUMMY DECIMAL );
+Query OK, 0 rows affected (0.32 sec)
+
+mysql> 
+mysql> INSERT INTO DUMMY VALUES (0);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select * from EMP;
++-------+--------+-----------+------+------------+---------+---------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
++-------+--------+-----------+------+------------+---------+---------+--------+
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-22 | 2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850.00 |    NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000.00 |    NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-11-08 | 1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 | 1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-10-03 |  950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1982-10-03 | 3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
++-------+--------+-----------+------+------------+---------+---------+--------+
+13 rows in set (0.00 sec)
+
+mysql> select * from DEPT;
++--------+------------+----------+
+| DEPTNO | DNAME      | LOC      |
++--------+------------+----------+
+|     10 | ACCOUNTING | NEW YORK |
+|     20 | RESEARCH   | DALLAS   |
+|     30 | SALES      | CHICAGO  |
+|     40 | OPERATIONS | BOSTON   |
++--------+------------+----------+
+4 rows in set (0.00 sec)
+
+mysql> show tables;
++---------------+
+| Tables_in_c03 |
++---------------+
+| BONUS         |
+| Child         |
+| DEPT          |
+| DUMMY         |
+| Department    |
+| EMP           |
+| Parent        |
+| SALGRADE      |
+| Student       |
+| Test          |
+| student       |
++---------------+
+11 rows in set (0.01 sec)
+
+mysql> desc Child;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| C_ID   | int(3)      | NO   | PRI | NULL    |       |
+| C_NAME | varchar(20) | YES  |     | NULL    |       |
+| P_ID   | int(3)      | YES  | MUL | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> create table Employee(eno int(3) primary key auto_increment,ename varchar(20),salary float(8,2),dno int(3),FOREIGN KEY(dno) REFERENCES Department(dno));
+Query OK, 0 rows affected (0.36 sec)
+
+mysql> alter table Employee auto_increment=100;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc Employee;
++--------+-------------+------+-----+---------+----------------+
+| Field  | Type        | Null | Key | Default | Extra          |
++--------+-------------+------+-----+---------+----------------+
+| eno    | int(3)      | NO   | PRI | NULL    | auto_increment |
+| ename  | varchar(20) | YES  |     | NULL    |                |
+| salary | float(8,2)  | YES  |     | NULL    |                |
+| dno    | int(3)      | YES  | MUL | NULL    |                |
++--------+-------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> desc Department;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| dno      | int(3)      | NO   | PRI | NULL    | auto_increment |
+| dname    | varchar(20) | YES  |     | NULL    |                |
+| location | varchar(20) | YES  |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+3 rows in set (0.01 sec)
+
+mysql> select * from Department;
++-----+-------+----------+
+| dno | dname | location |
++-----+-------+----------+
+|  10 | sai   | hyd      |
+|  11 | ram   | Bang     |
++-----+-------+----------+
+2 rows in set (0.00 sec)
+
+mysql> update Department set dname='CSE' where dno=10;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update Department set dname='EEE' where dno=11;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from Department;
++-----+-------+----------+
+| dno | dname | location |
++-----+-------+----------+
+|  10 | CSE   | hyd      |
+|  11 | EEE   | Bang     |
++-----+-------+----------+
+2 rows in set (0.00 sec)
+
+mysql> desc Employee;
++--------+-------------+------+-----+---------+----------------+
+| Field  | Type        | Null | Key | Default | Extra          |
++--------+-------------+------+-----+---------+----------------+
+| eno    | int(3)      | NO   | PRI | NULL    | auto_increment |
+| ename  | varchar(20) | YES  |     | NULL    |                |
+| salary | float(8,2)  | YES  |     | NULL    |                |
+| dno    | int(3)      | YES  | MUL | NULL    |                |
++--------+-------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> insert into Employee(ename,salary,dno) values('sairam',56000,10);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into Employee(ename,salary,dno) values('sairam',56000,12);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`c03`.`Employee`, CONSTRAINT `Employee_ibfk_1` FOREIGN KEY (`dno`) REFERENCES `Department` (`dno`))
+mysql> insert into Employee(ename,salary,dno) values('bhargav',90000,11);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from Employee;
++-----+---------+----------+------+
+| eno | ename   | salary   | dno  |
++-----+---------+----------+------+
+| 100 | sairam  | 56000.00 |   10 |
+| 102 | bhargav | 90000.00 |   11 |
++-----+---------+----------+------+
+2 rows in set (0.00 sec)
+
+mysql> 
+
