@@ -1,0 +1,25 @@
+Q: Which customers have not placed any order for computer desk?
+
+Q:  What are the order numbers for all orders that have included furniture finished in natural ash?
+
+Q: List the details of the product which got more orders.
+
+Q: List the details of the product which was sold maximum.
+
+Q: List all the products ordered by customer with id 1001.
+
+Q: List all the customers who ordered product Computer Desk?
+
+Q: List all the customers who placed order on 23-oct-2005.
+
+Q: List all the products ordered on 23-oct-2005.
+
+Q: Which state customers have placed more orders?
+
+Q: What is the total value the customer who placed order 1006 has to pay?
+
+Q: Which product have a standard price that is lower than average standard price?
+
+Q: From the product finish 'Natural Ash', which product costs more than others.
+
+Q: what is the total value of the order placed on 23-oct-2005
