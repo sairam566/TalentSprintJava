@@ -1,0 +1,44 @@
+mysql> select * from customer_t where customer_id  in(select customer_id from order_t where order_id in(select order_id from order_line where product_id!=3));
++-------------+--------------------------+-----------------+---------------+-------+-------------+
+| customer_id | name                     | address         | city          | state | postal_code |
++-------------+--------------------------+-----------------+---------------+-------+-------------+
+|           1 | Contemporary Casuals     | S Hines Blvd    | Gainesville   | FL    |       32601 |
+|           2 | Value Furniture          | S.W. 17th St.   | Plano         | TX    |       75094 |
+|           3 | Home Furnishings         | Allard Ave      | Albany        | NY    |       12209 |
+|           4 | Eastern Furniture        | Beltline Rd.    | Carteret      | NJ    |        7008 |
+|           5 | Impressions              | Westcott Ct.    | Sacramento    | CA    |       94206 |
+|          11 | American Euro Lifestyles | Missouri Ave N. | Prospect Park | NJ    |        7508 |
+|          12 | Battle Creek Furniture   | Capitol Ave. SW | Battle Creek  | MI    |       49015 |
++-------------+--------------------------+-----------------+---------------+-------+-------------+
+7 rows in set (0.00 sec)
+
+mysql> select * from customer_t where customer_id  in(select customer_id from order_t where order_id in(select order_id from order_line where product_id in(select product_id from product_t where description!= 'Computer Desk')));
++-------------+--------------------------+-----------------+---------------+-------+-------------+
+| customer_id | name                     | address         | city          | state | postal_code |
++-------------+--------------------------+-----------------+---------------+-------+-------------+
+|           1 | Contemporary Casuals     | S Hines Blvd    | Gainesville   | FL    |       32601 |
+|           2 | Value Furniture          | S.W. 17th St.   | Plano         | TX    |       75094 |
+|           3 | Home Furnishings         | Allard Ave      | Albany        | NY    |       12209 |
+|           4 | Eastern Furniture        | Beltline Rd.    | Carteret      | NJ    |        7008 |
+|           5 | Impressions              | Westcott Ct.    | Sacramento    | CA    |       94206 |
+|          11 | American Euro Lifestyles | Missouri Ave N. | Prospect Park | NJ    |        7508 |
++-------------+--------------------------+-----------------+---------------+-------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from order_id from order_t where order_id in(select order_id from order_line where product_id in(select product_id from product_t where finish='Natural Ash' ));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from order_t where order_id in(select order_id from order_line where product_id ' at line 1
+mysql> select * from order_id from order_t where order_id in(select order_id from order_line where product_id in(select product_id from product_t where finish='Natural Ash' ));
+mysql> select order_id from order_t where order_id in(select order_id from order_line where product_id in(select product_id from product_t where finish='Natural Ash' )); 
++----------+
+| order_id |
++----------+
+|     1001 |
+|     1007 |
+|     1002 |
+|     1003 |
+|     1008 |
+|     1006 |
+|     1009 |
++----------+
+7 rows in set (0.00 sec)
+
