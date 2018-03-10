@@ -9,3 +9,7 @@ Interview Questions:https://github.com/kdn251/interviews
 Collections topic:https://books.google.co.in/books?id=hMKjAgAAQBAJ&pg=PA859&lpg=PA859&dq=underlying+collection&source=bl&ots=BmiT0qiLEq&sig=ZPwDk5fH_BAq9xHFjiaOeIqUBX8&hl=en&sa=X&ved=0ahUKEwjwtYmy2KzZAhXMo48KHVtVApkQ6AEIZDAF#v=onepage&q&f=false
 
 page No:840
+
+
+Nice book refer 4-5 topics Dialy
+https://docs.oracle.com/javase/specs/jls/se9/html/index.html
