@@ -13,3 +13,6 @@ page No:840
 
 Nice book refer 4-5 topics Dialy
 https://docs.oracle.com/javase/specs/jls/se9/html/index.html
+
+java exams
+http://www.pskills.org/
