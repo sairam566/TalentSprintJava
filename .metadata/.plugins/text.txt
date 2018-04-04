@@ -16,3 +16,12 @@ https://docs.oracle.com/javase/specs/jls/se9/html/index.html
 
 java exams
 http://www.pskills.org/
+
+LeetCode Problems
+https://github.com/Blankj/awesome-java-leetcode
+
+Problems on arrays,data structures
+https://github.com/sherxon/AlgoDS
+
+williamfiset Data Structures
+https://github.com/williamfiset/data-structures
